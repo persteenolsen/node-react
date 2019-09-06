@@ -1,0 +1,47 @@
+
+
+        h1 { font-size: 14pt; color: green}
+       .nodeview { font-size: 12pt; color: black}
+       .nodeviewerror { font-size: 12pt; color: red}
+
+       .header-text { Color: Green; font-family: Verdana, sans-serif; font-size: 14pt}
+       .body-content { margin-left: 10pt; margin-right: 10pt; font-family: Verdana, sans-serif}
+
+
+        #title { 
+          text-align: center;
+          font-family: Verdana, sans-serif;
+         }
+
+        #persons {
+            text-align: center;
+            font-family: "Verdana, sans-serif";
+            font-size: 14pt;
+            border-collapse: collapse;
+            border: 3px solid #ddd;
+            width: 100%;
+            }
+
+         #persons td, #persons th {
+                   border: 1px solid #ddd;
+                   padding: 3px;
+                  }
+
+        #persons tr:nth-child(even){background-color: #f2f2f2;}
+
+        #persons thead {color: green; background-color:white }
+        #persons thead:hover {color: green; background-color: white; cursor:default;}
+
+        #persons tbody > tr:hover {background-color: #ddd; cursor: pointer;}
+                
+       .react-button-edit { width: 50pt; background-color: #ec971f; color:white;}
+       .react-button-delete { width: 50pt; background-color: #d9534f; color:white;}
+
+       .react-table-create { border-spacing: 10px; border-collapse: separate; }
+       
+       .react-table-edit { border-spacing: 10px; border-collapse: separate; }
+
+       .react-input-text {width:150pt;}
+             
+
+       

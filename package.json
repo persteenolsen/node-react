@@ -1,0 +1,16 @@
+{
+  "name": "node-crud",
+  "description": "A Node.js CRUD for Azure App Service",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "author": "Per Olsen",
+  "dependencies": {
+    "request": "^2.83.0",
+    "zip-folder": "^1.0.0",
+    "mysql": "^2.13.0"
+  },
+  "scripts": {
+    "start": "node nodeapp.js"
+  }
+}

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>A cool Node.js App</title>
+		
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+<!--Note: An alternative way to load the files for bootstraap but no need for that :-) -->
+<!--<link rel="stylesheet" type="text/css" href="./public/bootstrap.min.css">
+<script type="text/javascript" src="./public/jquery.min.js"></script>
+<script type="text/javascript" src="./public/bootstrap.min.js"></script>-->
+
+<link rel="stylesheet" type="text/css" href="./public/style.css">
+
+</head>
+
+<body>
+
+    
+   <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+                <div class="navbar-header">
+                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                             <span class="sr-only">Toggle navigation</span>
+                             <span class="icon-bar"></span>
+                             <span class="icon-bar"></span>
+                             <span class="icon-bar"></span>
+                         </button>
+           
+                  </div>
+                   <div class="navbar-collapse collapse">
+                         <ul class="nav navbar-nav">
+                             
+                            
+                             <li>
+                                 <a href="/">Home</a>
+                             </li>
+                                 
+                                                                
+                             <li>
+                                 <a href="/about">About this Node.js App</a>
+                             </li>
+                         
+                             
+                             <li>
+                                 <a href="/showpersons">Admin Persons (React)</a>
+                             </li>
+ 
+                             <li>
+                                 <a href="/persons" target="_blank">Show Persons (JSON)</a>
+                             </li>
+                             
+                                                        
+                            
+                         </ul>
+                </div>
+          </div>
+   </nav>
+           
+   <br/><br/>
+ 
+
+    <div class="container">
+   
+    <br/><br/>
+    
+    <div class="header-text">
+    Create a Person by React client and a Node.js Web API
+    </div> 
+
+    <br/>
+
+   <!--Here goes the API data-->
+   <div id="rootapi"></div>
+
+  </div>
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.js"></script>
+
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js"></script>
+
+
+   <script type="text/babel" src="/public/createpersonreact.jsx" data-presets="es2015,react">
+   </script>
+
+   
+</body>
+</html>
