@@ -12,7 +12,7 @@ var mysql = require('mysql');
 // Returning the DB connection
 function getDBConnection(){
     
- // Note: Here you need to type the database connection information!!!
+ 
  // Note: Here you need to type the database connection information!!!
         var con = mysql.createConnection({
             host: "yourdbhost",
