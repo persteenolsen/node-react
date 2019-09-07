@@ -14,14 +14,14 @@ function getDBConnection(){
     
  
  // Note: Here you need to type the database connection information!!!
-        var con = mysql.createConnection({
-            host: "yourdbhost",
-            user: "yourdbusername",
-            password: "yourpassword",
-            database: "yourdbname"
-         }); 
-    
- 
+ var con = mysql.createConnection({
+    host: "yourdbhost",
+    user: "yourdbusername",
+    password: "yourdbpassword",
+    database: "yourdbname"
+    });
+
+    return con;
   }
 
 
