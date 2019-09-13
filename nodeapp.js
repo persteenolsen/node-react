@@ -25,77 +25,12 @@ function getDBConnection(){
   }
 
 
- // Get the Mime Content-Type based on the file extention
- function getContentType(fileext){
-    
-    // Default contentType need to be text/html to display the error404.html if we type wrong URL 
-    var contentType = 'text/html';
-
-    switch (fileext) {
-        case '.js':
-            contentType = 'text/javascript';
-            break;
-        case '.css':
-            contentType = 'text/css';
-            break;
-        case '.json':
-            contentType = 'application/json';
-            break;
-        case '.png':
-            contentType = 'image/png';
-            break;      
-        case '.jpg':
-            contentType = 'image/jpg';
-            break;
-         case '.ico':
-            contentType = 'image/x-icon';
-            break;
-     }
-      return contentType;
-   }
-
    
 // The module validate containing the Validate Class and funtionality for validate user input (validate.js)
  var Validate = require('./validate');
 
- // Validate the users input ( Person ) and using the module with the Validate Class and functions (validate.js)
- // Returning TRUE if all input are valid !
- function validateInputData(name, email, age){
-    
-    var allinputvalid = false;
-    var vname = false;
-    var vemail = false;
-    var vage = false;
-    
-    var validate = new Validate();
-
-    if( name != "" ){
-       
-        vname = validate.ValidateAllLetters(name);
-        if(vname)
-           vname = validate.ValidateStringLength(name, 2, 30);
-        console.log("Valid Name: " + vname);
-       }
-     if( email != "" ){
-        
-         vemail = validate.ValidateEmail(email);
-         if(vemail)
-            vemail = validate.ValidateStringLength(email, 8, 30);
-         console.log("Valid email: " + vemail);
-     }
-     if( age != "" ){
-         
-         vage = validate.ValidateAge(age, 18, 125);
-         console.log("Valid age: " + vage);
-      }
-
-    if( vname == true && vemail == true && vage == true )
-       allinputvalid = true;
-
-    return allinputvalid;
-
- }
-
+ // The module mimetypes containing the MimeTypes Class and funtionality for getting mime content-type
+ var MimeTypes = require('./mimetypes');
 
 
 // The Server 
@@ -122,7 +57,9 @@ http.createServer(function (request, response) {
     var extname = path.extname(filePath);
     
     // Try to get the Mime Content-type based from the current file exteention
-    var contentType = getContentType(extname);
+    var getmime = new MimeTypes();
+    var contentType = getmime.getContentType(extname);
+    
 
     // Here goes the routing / what kind of HTTP request the server get from link user click or
     // files includes in the HTML-files
@@ -170,11 +107,8 @@ http.createServer(function (request, response) {
             else{
             
             var newresult = JSON.stringify(result); 
-            //console.log("Row 1: " + newresult); 
-
+           
             newresult = newresult.substring(1,(newresult.length-1));
-
-            //console.log("Row 2: " + newresult); 
 
             response.writeHead(200, {"Content-Type": "application/json"});
             response.end(newresult);
@@ -185,10 +119,10 @@ http.createServer(function (request, response) {
              // This format is given by SQL but fetch in React cant handle that
              // [ RowDataPacket { id: 56, name: 'Lars', age: 81, email: 'lars@test.dk' } ]
 
-             // Fetch in React can handle this:
+             // Fetch in React can handle these:
              // var obj = { id: 1, name: "Per", age: 45,email: "per@test.fo" };
-            // response.end(JSON.stringify(obj));
-
+             //  { id: 1, name: "Per", age: 45,email: "per@test.fo" };
+             // response.end(JSON.stringify(obj));
                        
               }
           });
@@ -216,18 +150,15 @@ http.createServer(function (request, response) {
     
             postBody = JSON.parse(body);
 
-            //console.log("Name: " + postBody.name ); 
-            //console.log("Email: " + postBody.email ); 
-            //console.log("Age 1: " + postBody.age ); 
+            // An instance of the Validate Class
+            var v = new Validate();
             
             // Check users input data (Person) by this function call using the module in Class Validate / validate.js
-            inputdatavalid = validateInputData(postBody.name, postBody.email, postBody.age);
-            
-            var v = new Validate();
+            inputdatavalid = v.validateInputData(postBody.name, postBody.email, postBody.age);
+                        
             var isnumber = v.ValidateIsNumber(id, 0, 10000);
         
             console.log("Id is a number: " + isnumber ); 
-
           
             // If all user data are valid add the Persons
             if( inputdatavalid == true && isnumber == true ){
@@ -291,8 +222,11 @@ http.createServer(function (request, response) {
    
            postBody = JSON.parse(body);
            
+           // An instance of the Validate Class
+           var v = new Validate();
+           
            // Check users input data (Person) by this function call using the module in Class Validate / validate.js
-           inputdatavalid = validateInputData(postBody.name, postBody.email, postBody.age);
+           inputdatavalid = v.validateInputData(postBody.name, postBody.email, postBody.age);
 
            // If all user data are valid add the Persons
            if( inputdatavalid == true ){
@@ -319,8 +253,9 @@ http.createServer(function (request, response) {
         });
     } 
     else if( ( filePath.indexOf('.html') != -1 || pathurl.indexOf('/public/') != -1 ) ){
-            
-            fs.readFile(filePath, function(error, content) {
+                     
+        
+           fs.readFile(filePath, function(error, content) {
         
             if (error) {
                 fs.readFile('./views/error404.html', function(error, content) {

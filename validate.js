@@ -1,5 +1,41 @@
 class Validate {
     
+ // Validate the users input ( Person ) and using the modules in this Class
+ // Returning TRUE if all input are valid !
+ validateInputData(name, email, age){
+    
+    var allinputvalid = false;
+    var vname = false;
+    var vemail = false;
+    var vage = false;
+    
+
+    if( name != "" ){
+       
+        vname = this.ValidateAllLetters(name);
+        if(vname)
+           vname = this.ValidateStringLength(name, 2, 30);
+        console.log("Valid Name: " + vname);
+       }
+     if( email != "" ){
+        
+         vemail = this.ValidateEmail(email);
+         if(vemail)
+            vemail = this.ValidateStringLength(email, 8, 30);
+         console.log("Valid email: " + vemail);
+     }
+     if( age != "" ){
+         
+         vage = this.ValidateAge(age, 18, 125);
+         console.log("Valid age: " + vage);
+      }
+
+    if( vname == true && vemail == true && vage == true )
+       allinputvalid = true;
+
+    return allinputvalid;
+
+ }
 
     
  ValidateEmail(inputText) {
