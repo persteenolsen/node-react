@@ -22,6 +22,7 @@ function getDBConnection(){
         });
 
 
+
     return con;
   }
 
@@ -61,8 +62,8 @@ http.createServer(function (request, response) {
     var contentType = getmime.getContentType(extname);
     
 
-    // Here goes the routing / what kind of HTTP request the server get from link user click or
-    // files includes in the HTML-files
+    // Here goes the routing / what kind of HTTP request the server get from link user click
+    // and then the FETCH API call from the React client
     if( pathurl === "/persons" ){
        
         var con = getDBConnection();
@@ -122,37 +123,23 @@ http.createServer(function (request, response) {
         
     }
 
-
+    // Here goes the current HTML-file or the included files like css from the public directury 
     else if( ( filePath.indexOf('.html') != -1 || pathurl.indexOf('/public/') != -1 ) ){
-                  
-           fs.readFile(filePath, function(error, content) {
-        
-            if (error) {
-                fs.readFile('./views/error404.html', function(error, content) {
-                response.writeHead(404, { 'Content-Type': contentType });
-                 response.end(content, 'utf-8');
-                });
-              }
-             else {
-                   response.writeHead(200, { 'Content-Type': contentType });
-                   response.end(content, 'utf-8');
-                 }
-           });
-        }
+            
+        var s = new Service();
+        s.doWriteFileToClient( fs, filePath, response, contentType );
 
+        }
+    
+    // Here the error404.html will be send to the client because of an error 
     else {
          
-         fs.readFile(__dirname + '/views/error404.html', function (err, data) {
-         if (err){
-            response.writeHead(404);
-            response.write('file not found');
-            }
-        else{
-             response.writeHead(200, {'Content-Type': 'text/html'});
-             response.write(data);
-             }
-         response.end();
-       });
+         var s = new Service();
+         filePath =  "/views/error404.html";
+         contentType = "text/html";
+
+        s.doWriteFileToClient( fs, filePath, response, contentType );
+
     }
 
 

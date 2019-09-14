@@ -10,4 +10,4 @@ Show, Create, Update and Delete Persons by a React and a Node.js App without usi
 - Micosoft Azure App Service as cloud hosting using Windows and iisnode
 - Visual Studio Code as Text Editor
 
-Note: If using the files: "nodeapp_get.js" and "nodeapp_get_create_delete.js" you must change the React module in "listpersonsreact.jsx" to match the functionality for only show persons (nodeapp_get.js) or show, create and delete persons (nodeapp_get_create_delete.js). Just change the React file: "listpersonsreact.jsx" in the public folder and leave the other React-files there.
+Note: If using the files: "nodeapp_get.js" you must change the React module in "listpersonsreact.jsx" to match the functionality for only show persons (nodeapp_get.js). Just change the React file: "listpersonsreact.jsx" in the public folder and leave the other React-files there.

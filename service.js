@@ -182,10 +182,27 @@ class Service {
 
     }
 
+   
+    doWriteFileToClient( fs, filePath, response , contentType ){
+       
+        fs.readFile(filePath, function(error, content) {
+        
+            if (error) {
+                fs.readFile('./views/error404.html', function(error, content) {
+                response.writeHead(404, { 'Content-Type': contentType });
+                 response.end(content, 'utf-8');
+                });
+              }
+             else {
+                   response.writeHead(200, { 'Content-Type': contentType });
+                   response.end(content, 'utf-8');
+                 }
+           });
+           
 
+      }
 
-
-
+ 
 }
 
 module.exports = Service;
