@@ -22,15 +22,14 @@ function getDBConnection(){
         });
 
 
-
     return con;
   }
 
   
  // The module mimetypes containing the MimeTypes Class and funtionality for getting mime content-type
- var MimeTypes = require('./mimetypes');
+ var MimeTypes = require('./public/mimetypes');
 
- var Service = require('./service');
+ var Service = require('./public/service');
 
 
 
@@ -135,12 +134,9 @@ http.createServer(function (request, response) {
     else {
          
          var s = new Service();
-         filePath =  "/views/error404.html";
-         contentType = "text/html";
+         s.doWriteFileToClient( fs, "/views/error404.html", response, "text/html" );
 
-        s.doWriteFileToClient( fs, filePath, response, contentType );
-
-    }
+        }
 
 
 }).listen(port);

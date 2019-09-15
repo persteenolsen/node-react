@@ -48,30 +48,6 @@ http.createServer(function (request, response) {
      }
 
      
-    // Note: No need for that in this demo
-    /*console.log('File-parth: ' + filePath );
-    console.log('Parth: ' + pathurl );
-    console.log('Content-type: ' + contentType );
-    console.log('Extname: ' + extname );
-
-    // If GET is from the public dir for example style.css
-    if( pathurl.indexOf('/public/') != -1 ){
-        console.log('Public dir: ' + pathurl );
-    }
-
-    if( filePath.indexOf('.html') === -1 ){
-        console.log('Url not poiting at html-file: ' + filePath );
-     }
-
-     // URL Error: There will be no html-file or a file in the public folder
-     if( filePath.indexOf('.html') === -1 && pathurl.indexOf('/public/') === -1 ){
-        console.log('Error in Url !' );
-     }
-     // URL Error: There will be no file extention 
-     if( extname === '' ){
-        console.log('Error in URL - no file extention !' );
-     }*/
-
     if( pathurl === "/persons" ){
 
         var mysql = require('mysql');
@@ -135,7 +111,7 @@ http.createServer(function (request, response) {
        });
     }
 
-// console.log('request is stopping...');
+
 
 }).listen(port);
 console.log('Server running at 8080');
